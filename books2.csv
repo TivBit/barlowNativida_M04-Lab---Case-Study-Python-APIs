@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on %(Date: 12 Feb 2023)s
+@author: %(Tiv Barlow)s
+Python Version 3.11.1
+SDEV 220 Spring 2023
+Assignment: M04 Programming Assignment - Modules and Databases- Ch16
+Chapter 16 Task: 16.8
+File Type: CVS
+"""
+
+title,author,year
+The Weirdstone of Brisingamen,Alan Garner,1960
+Perdido Street Station,China Miéville,2000
+Thud!,Terry Pratchett,2005
+The Spellman Files,Lisa Lutz,2007
+Small Gods,Terry Pratchett,1992
