@@ -8,13 +8,11 @@ SDEV 220 Spring 2023
 Assignment: M04 Programming Assignment - Modules and Databases
 Chapter 16 Task: 16.8
 """
+import flask as Flask
+from bookClass import Book
 
-from flask import Flask
 application = Flask
 
-class Book():
-    def __init__(self, title, author, year):
-        pass
     
 books = [
     Book("The Weirdstone of Brisingamen", "Alan Garner", 1960),
@@ -23,18 +21,6 @@ books = [
     Book("The Spellman Files", "Lisa Lutz", 2007),
     Book("Small Gods", "Terry Pratchett", 1992)
     ]
-
-
-class Book_Title(Book):
-    def __init__(self, title, author, year):
-        self.title = title
-        self.author = author
-        self.year = year
-        
-        if year <= 1969:
-            return f"{title}, written by {author} was written in {year}."
-        else:
-            return f"There is no book in the library written in the year {year}."
 
 application = Flask
 
@@ -46,9 +32,8 @@ def homePage():
 
 @application.route("/books")
 def books():
-    books = {}
     for b in books:
-        yield {"title": b.title, "author": b.author, "year": b.year} + "\n"
+        yield ({"title": b.title, "author": b.author, "year": b.year}) + "\n"
 
 
 
@@ -57,7 +42,6 @@ def particular(title):
     print(title)
     for b in books:
         if b.title.lower() == title:
-            yield {"title": b.title, "author": b.author, "year": b.year} + "\n"
+            yield ({"title": b.title, "author": b.author, "year": b.year}) + "\n"
             
-            print()
-            yield "Hello World"
+
