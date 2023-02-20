@@ -10,62 +10,54 @@ Chapter 16 Task: 16.8
 """
 
 from flask import Flask
-application = Flask(__name__)
+application = Flask
 
-
-class Book(): 
-    def __init__(self, Id, book_name, author, publisher):
-        self.id = Id
-        self.book_name = book_name
-        self.author = author
-        self.publisher = publisher
-        
-    def __str__(self):
-        return f"{self.title} was written by {self.author} in {self.year}"
+class Book():
+    def __init__(self, title, author, year):
+        pass
     
 books = [
-    Book(123, "The Weirdstone of Brisingamen", "Alan Garner", "The Write Brothers"),
-    Book(456, "Perdido Street Station", "China Miéville", "New Albany Publishing"),
-    Book(789, "Thud!", "Terry Pratchett", "Clarksville Maniacs" ),
-    Book(101,"The Spellman Files", "Lisa Lutz", "Ivy Tech Essays"),
-    Book(112, "Small Gods", "Terry Pratchett", "Makin this one up")
+    Book("The Weirdstone of Brisingamen", "Alan Garner", 1960),
+    Book("Perdido Street Station", "China Miéville", 2000),
+    Book("Thud!", "Terry Pratchett", 2005),
+    Book("The Spellman Files", "Lisa Lutz", 2007),
+    Book("Small Gods", "Terry Pratchett", 1992)
     ]
 
 
-######################## JSON
-
-import json
-
-
-with open("books2.json") as fromFile:
-    data = []
-    for line in fromFile:
-        data.append(json.loads(line.strip()))
+class Book_Title(Book):
+    def __init__(self, title, author, year):
+        self.title = title
+        self.author = author
+        self.year = year
         
+        if year <= 1969:
+            return f"{title}, written by {author} was written in {year}."
+        else:
+            return f"There is no book in the library written in the year {year}."
+
+application = Flask
+
+@application.route("/")
+def homePage():
+    page = "<!DOCTYPE html><html><head><title>Sharing Splendid Book Library</title></head><body><h1>hello</h1><p>world</p></body></html>"
+    return page
+
+
 @application.route("/books")
-def bookbag():
-    with open("books2.json") as fromFile:
-        for line in fromFile:
-            yield line.strip()
+def books():
+    books = {}
+    for b in books:
+        yield {"title": b.title, "author": b.author, "year": b.year} + "\n"
+
+
+
+@application.route("/find/by-name/<title>")
+def particular(title):
+    print(title)
+    for b in books:
+        if b.title.lower() == title:
+            yield {"title": b.title, "author": b.author, "year": b.year} + "\n"
             
-@application.route("/books/<year>")
-def bookbag_year(year):
-    with open("books2.json") as fromFile:
-        
-            def year(Id, book_name, author, publisher):
-                
-            #Iterate through lines
-              for i, line in enumerate(fromFile):
-            
-                #Choose specific ID to print.
-                if Id == Id:
-                    print(line)
-                                    
-                else:
-                    return "There are no books with the ID (Id)}."
-                   
-            print(line)
-            yield "hello world"
-            
-            
-        
+            print()
+            yield "Hello World"
